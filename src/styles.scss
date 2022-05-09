@@ -1,1 +1,29 @@
 /* You can add global styles to this file, and also import other style files */
+/* You can add global styles to this file, and also import other style files */
+@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;
+background-color: #f6f8fa; }
+
+.full-width{
+    width: 100%;
+}
+
+.top-padding{
+    padding-top: 3px;
+}
+
+.margin-left mat-radio-button:not(:first-child){
+    margin-left:10px;
+}
+
+.form-container{
+    margin: 20px;
+}
+
+@media (min-width:1024px) {
+    .form-container{
+        margin: 100px;
+    }
+}
