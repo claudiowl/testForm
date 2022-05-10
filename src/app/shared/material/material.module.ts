@@ -37,6 +37,9 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatDatepickerModule,
     MatNativeDateModule,
     MatDividerModule
+  ],
+  providers:[
+    
   ]
 })
 export class MaterialModule { }

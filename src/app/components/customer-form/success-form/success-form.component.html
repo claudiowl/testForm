@@ -1,5 +1,66 @@
-    <h1 mat-dialog-title>Customer Validated - {{formi.firstName}}</h1>
-    <div mat-dialog-content>Thank you!!</div>
-    <div mat-dialog-actions>
-        <button mat-button mat-dialog-close (click)="close()">Close</button>
+<h1 mat-dialog-title>Customer Validated - "<strong>{{formi.firstName}} {{formi.lastName}}"</strong></h1>
+<div mat-dialog-content>
+    <div class="row">
+        <div class="col">
+            Address Home
+        </div>
+        <div class="col">
+            {{ formi.addressHome}}
+        </div>
     </div>
+    <div class="row">
+        <div class="col">
+            Postal Code
+        </div>
+        <div class="col">
+            {{formi.postalCode}}
+        </div>
+    </div>
+    <div class="p-diviser">
+        <mat-divider></mat-divider>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            Mobile Phone
+        </div>
+        <div class="col">
+            {{formi.cellPhone}}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            Home Phone
+        </div>
+        <div class="col">
+            {{formi.homePhone}}
+        </div>
+    </div>
+    <div class="p-diviser">
+        <mat-divider></mat-divider>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            Profession
+        </div>
+        <div class="col">
+            {{ formi.profession}}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            Income
+        </div>
+        <div class="col">
+            {{formi.income}}
+        </div>
+    </div>
+
+
+</div>
+<div class="p-20">
+    <div mat-dialog-actions>
+        <button class="button-blue" mat-button mat-dialog-close (click)="close()">Finish</button>
+    </div>
+</div>

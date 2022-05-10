@@ -1,236 +1,257 @@
 <form [formGroup]="profileForm" class="form-container" #myForm="ngForm">
-    <mat-card style="padding: 20px;">
-        <mat-card-header style="padding: 20px;">
-            <mat-card-title>
-                <h1 style="font-size: 30px;"><strong>Potencial Customers</strong></h1>
-            </mat-card-title>
-        </mat-card-header>
-        <mat-card-content style="padding: 20px;">
-            <p style="color: gray;">
-                fill out the form, to assess a future customer.
-            </p>
-            <mat-divider></mat-divider>
-
-            <div class="row">
-                <!--First Name -->
-                <h2 style="margin-top:10px;"><strong>Personal Information</strong></h2>
-                <div class="col-md-6 col-xs-12 col-sm-12">
-                    <div class="padding-inputs">
-                        <mat-form-field appearance="outline" class="full-width">
-                            <mat-label>First name</mat-label>
-                            <input matInput formControlName="firstName" name="firstName" placeholder="ex: Luis" maxlength="80">
-                        </mat-form-field>
-                        <div
-                            *ngIf="profileForm.controls['firstName']?.touched && profileForm.controls['firstName']?.invalid">
-                            <mat-error
-                                *ngIf="profileForm.controls['firstName'].errors && profileForm.controls['firstName'].errors['required']">
-                                First name is required
-                            </mat-error>
-                            <mat-error
-                                *ngIf="profileForm.controls['firstName'].errors && profileForm.controls['firstName'].errors['pattern']">
-                                Invalid format
-                            </mat-error>
-                        </div>
-                    </div>
-                </div>
-                <!--Last Name -->
-                <div class="col-md-6 col-xs-12 col-sm-12">
-
-                    <mat-form-field appearance="outline" class="full-width">
-                        <mat-label>Last name </mat-label>
-                        <input matInput formControlName="lastName" name="lastName" matinput="b"
-                            placeholder="ex: Martinez">
-                    </mat-form-field>
-                    <div *ngIf="profileForm.controls['lastName']?.touched && profileForm.controls['lastName']?.invalid">
-                        <mat-error
-                            *ngIf="profileForm.controls['lastName'].errors && profileForm.controls['lastName'].errors['required']">
-                            Last name is required
-                        </mat-error>
-                        <mat-error
-                            *ngIf="profileForm.controls['lastName'].errors && profileForm.controls['lastName'].errors['pattern']">
-                            Invalid format
-                        </mat-error>
-                    </div>
-                </div>
+    <div class="p-20">
+        <mat-card>
+            <div class="p-20">
+                <mat-card-header>
+                    <mat-card-title>
+                        <h1 class="tittle"><strong>Potencial Customers</strong></h1>
+                    </mat-card-title>
+                </mat-card-header>
             </div>
+            <div class="p-20">
+                <mat-card-content>
+                    <p class="sub-description">
+                        fill out the form, to assess a future customer.
+                    </p>
+                    <mat-divider></mat-divider>
 
-            <div class="row" style="padding-bottom: 10px">
-                <!--Gender -->
-                <div class="col-md-6 col-xs-12 col-sm-12 ">
                     <div class="row">
-                        <label id="example-radio-group-label" class="col align-self-start"
-                            style="color:#757575">Gender</label>
-                        <mat-radio-group aria-labelledby="example-radio-group-label" formControlName="gender">
-                            <mat-radio-button class="example-radio-button col align-self-center"
-                                *ngFor="let gender of genders" [value]="gender">
-                                {{gender}}
-                            </mat-radio-button>
-                        </mat-radio-group>
-                        <div *ngIf="profileForm.controls['gender']?.touched && profileForm.controls['gender']?.invalid">
-                            <mat-error
-                                *ngIf="profileForm.controls['gender'].errors && profileForm.controls['gender'].errors['required']">
-                                gender is required
-                            </mat-error>
+                        <!--First Name -->
+                        <h2 class="m-top"><strong>Personal Information</strong></h2>
+                        <div class="col-md-6 col-xs-12 col-sm-12">
+                            <div class="padding-inputs">
+                                <mat-form-field appearance="outline" class="full-width">
+                                    <mat-label>First name</mat-label>
+                                    <input matInput formControlName="firstName" name="firstName" placeholder="ex: Luis"
+                                        maxlength="80">
+                                </mat-form-field>
+                                <div
+                                    *ngIf="profileForm.controls['firstName']?.touched && profileForm.controls['firstName']?.invalid">
+                                    <mat-error
+                                        *ngIf="profileForm.controls['firstName'].errors && profileForm.controls['firstName'].errors['required']">
+                                        First name is required
+                                    </mat-error>
+                                    <mat-error
+                                        *ngIf="profileForm.controls['firstName'].errors && profileForm.controls['firstName'].errors['pattern']">
+                                        Invalid format
+                                    </mat-error>
+                                </div>
+                            </div>
+                        </div>
+                        <!--Last Name -->
+                        <div class="col-md-6 col-xs-12 col-sm-12">
+
+                            <mat-form-field appearance="outline" class="full-width">
+                                <mat-label>Last name </mat-label>
+                                <input matInput formControlName="lastName" name="lastName" matinput="b"
+                                    placeholder="ex: Martinez">
+                            </mat-form-field>
+                            <div
+                                *ngIf="profileForm.controls['lastName']?.touched && profileForm.controls['lastName']?.invalid">
+                                <mat-error
+                                    *ngIf="profileForm.controls['lastName'].errors && profileForm.controls['lastName'].errors['required']">
+                                    Last name is required
+                                </mat-error>
+                                <mat-error
+                                    *ngIf="profileForm.controls['lastName'].errors && profileForm.controls['lastName'].errors['pattern']">
+                                    Invalid format
+                                </mat-error>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <!--Date of birth -->
-                <div class="col-md-6 col-xs-12 col-sm-12 ">
-                    <mat-form-field class="full-width" appearance="legacy">
-                        <mat-label>Choose date of birth</mat-label>
-                        <input matInput  [matDatepicker]="picker" formControlName="dob" placeholder="01/20/1990">
-                        <mat-hint>MM/DD/YYYY</mat-hint>
-                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                        <mat-datepicker touchUi #picker></mat-datepicker>
-                    </mat-form-field>
-                    <div *ngIf="profileForm.controls['dob']?.touched && profileForm.controls['dob']?.invalid">
-                        <mat-error
-                            *ngIf="profileForm.controls['dob'].errors && profileForm.controls['dob'].errors['required']">
-                            date of birth is required
-                        </mat-error>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <mat-divider></mat-divider>
-                <h2 style="margin-top:10px"><strong>Contact Infromation</strong></h2>
-                <!--cellphone-->
-                <div class="col-md-6 col-xs-12 col-sm-12 ">
-                    <mat-form-field appearance="outline" class="full-width">
-                        <mat-label>Cellphone</mat-label>
-                        <input matInput name="cellPhone" matinput="cellPhone" (change)="changeCellPhone($event)"
-                            formControlName="cellPhone" placeholder="(xxx) xxx-xxxx" maxlength="17">
-                    </mat-form-field>
-                    <div
-                        *ngIf="profileForm.controls['cellPhone']?.touched && profileForm.controls['cellPhone']?.invalid">
-                        <mat-error
-                            *ngIf="profileForm.controls['cellPhone'].errors && profileForm.controls['cellPhone'].errors['required']">
-                            cellPhone is required
-                        </mat-error>
-                        <mat-error
-                            *ngIf="profileForm.controls['cellPhone'].errors && profileForm.controls['cellPhone'].errors['pattern']">
-                            Invalid format
-                        </mat-error>
-                    </div>
-                </div>
-                <!--homePhone-->
-                <div class="col-md-6 col-xs-12 col-sm-12">
-                    <mat-form-field appearance="outline" class="full-width">
-                        <mat-label>Homephone</mat-label>
-                        <input matInput name="homePhone" matinput="homePhone" formControlName="homePhone"  (change)="changeHomePhone($event)"
-                             placeholder="(xxx) xxx-xxxx" maxlength="17">
-                    </mat-form-field>
-                    <div
-                        *ngIf="profileForm.controls['homePhone']?.touched && profileForm.controls['homePhone']?.invalid">
-                        <mat-error
-                            *ngIf="profileForm.controls['homePhone'].errors && profileForm.controls['homePhone'].errors['required']">
-                            homePhone is required
-                        </mat-error>
-                        <mat-error
-                            *ngIf="profileForm.controls['homePhone'].errors && profileForm.controls['homePhone'].errors['pattern']">
-                            Invalid format
-                        </mat-error>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <!--addressHome-->
-                <div class="col-md-6 col-xs-12 col-sm-12 ">
-                    <mat-form-field appearance="outline" class="full-width">
-                        <mat-label>Adress home</mat-label>
-                        <input matInput name="addressHome" matinput="addressHome" formControlName="addressHome"
-                            placeholder="Calle siempre viva, 95">
-                    </mat-form-field>
-                    <div
-                        *ngIf="profileForm.controls['addressHome']?.touched && profileForm.controls['addressHome']?.invalid">
-                        <mat-error
-                            *ngIf="profileForm.controls['addressHome'].errors && profileForm.controls['addressHome'].errors['required']">
-                            address home is required
-                        </mat-error>
-                        <mat-error
-                            *ngIf="profileForm.controls['addressHome'].errors && profileForm.controls['addressHome'].errors['pattern']">
-                            Invalid format
-                        </mat-error>
-                    </div>
-                </div>
-                <!--profession-->
-                <div class="col-md-6 col-xs-12 col-sm-12">
-                    <mat-form-field appearance="outline" class="full-width">
-                        <mat-label>Postal code / ZIP</mat-label>
-                        <input matInput name="profession" matinput="postalCode" formControlName="postalCode"
-                            placeholder="ex: JMBPD22">
-                    </mat-form-field>
-                    <div
-                        *ngIf="profileForm.controls['postalCode']?.touched && profileForm.controls['postalCode']?.invalid">
-                        <mat-error
-                            *ngIf="profileForm.controls['postalCode'].errors && profileForm.controls['postalCode'].errors['required']">
-                            postalCode is required
-                        </mat-error>
-                        <mat-error
-                            *ngIf="profileForm.controls['postalCode'].errors && profileForm.controls['postalCode'].errors['pattern']">
-                            Invalid format
-                        </mat-error>
-                    </div>
-                </div>
 
-            </div>
-            <div class="row">
-                <!--profession-->
-                <div class="col-md-6 col-xs-12 col-sm-12">
-                    <mat-form-field appearance="outline" class="full-width">
-                        <mat-label>Profession</mat-label>
-                        <input matInput name="profession" matinput="profession" formControlName="profession"
-                            placeholder="Developer">
-                    </mat-form-field>
-                    <div
-                        *ngIf="profileForm.controls['profession']?.touched && profileForm.controls['profession']?.invalid">
-                        <mat-error
-                            *ngIf="profileForm.controls['profession'].errors && profileForm.controls['profession'].errors['required']">
-                            profession is required
-                        </mat-error>
-                        <mat-error
-                            *ngIf="profileForm.controls['profession'].errors && profileForm.controls['profession'].errors['pattern']">
-                            Invalid format
-                        </mat-error>
+                    <div class="row" >
+                        <!--Gender -->
+                        <div class="col-md-6 col-xs-12 col-sm-12 p-bot">
+                            <div class="row">
+                                <label id="example-radio-group-label" class="col align-self-start"
+                                    class="sub-description">Gender</label>
+                                <mat-radio-group aria-labelledby="example-radio-group-label" formControlName="gender">
+                                    <mat-radio-button class="example-radio-button col align-self-center"
+                                        *ngFor="let gender of genders" [value]="gender">
+                                        {{gender}}
+                                    </mat-radio-button>
+                                </mat-radio-group>
+                                <div
+                                    *ngIf="profileForm.controls['gender']?.touched && profileForm.controls['gender']?.invalid">
+                                    <mat-error
+                                        *ngIf="profileForm.controls['gender'].errors && profileForm.controls['gender'].errors['required']">
+                                        gender is required
+                                    </mat-error>
+                                </div>
+                            </div>
+                        </div>
+                        <!--Date of birth -->
+                        <div class="col-md-6 col-xs-12 col-sm-12  p-bot ">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Choose date of birth</mat-label>
+                                <input matInput [matDatepicker]="picker" [max]="maxDate" formControlName="dob" readonly
+                                    placeholder="01/20/1990">
+                                <mat-hint>MM/DD/YYYY</mat-hint>
+                                <mat-datepicker-toggle matSuffix [for]="picker" class="full-width">
+                                </mat-datepicker-toggle>
+                                <mat-datepicker touchUi #picker></mat-datepicker>
+                            </mat-form-field>
+                            <div *ngIf="profileForm.controls['dob']?.touched && profileForm.controls['dob']?.invalid">
+                                <mat-error
+                                    *ngIf="profileForm.controls['dob'].errors && profileForm.controls['dob'].errors['required']">
+                                    date of birth is required
+                                </mat-error>
+                                <mat-error
+                                    *ngIf="profileForm.controls['dob'].errors && !profileForm.controls['dob'].errors['required']">
+                                    Use an available dated
+                                </mat-error>
+
+
+                            </div>
+                        </div>
                     </div>
-                </div>
+                    <div class="row">
+                        <mat-divider></mat-divider>
+                        <h2 class="m-top"><strong>Contact Infromation</strong></h2>
+                        <!--cellphone-->
+                        <div class="col-md-6 col-xs-12 col-sm-12 ">
+                            <mat-form-field appearance="outline" class="full-width">
+                                <mat-label>Mobile phone</mat-label>
+                                <input matInput name="cellPhone" matinput="cellPhone" id="cellphone"
+                                    formControlName="cellPhone" placeholder="(xxx) xxx-xxxx" maxlength="14"
+                                    (keyup)="changeCellPhone($event)">
+                            </mat-form-field>
+                            <div
+                                *ngIf="profileForm.controls['cellPhone']?.touched && profileForm.controls['cellPhone']?.invalid">
+                                <mat-error
+                                    *ngIf="profileForm.controls['cellPhone'].errors && profileForm.controls['cellPhone'].errors['required']">
+                                    Mobile phone is required
+                                </mat-error>
+                                <mat-error
+                                    *ngIf="profileForm.controls['cellPhone'].errors && profileForm.controls['cellPhone'].errors['pattern']">
+                                    Invalid format
+                                </mat-error>
+                            </div>
+                        </div>
+                        <!--homePhone-->
+                        <div class="col-md-6 col-xs-12 col-sm-12">
+                            <mat-form-field appearance="outline" class="full-width">
+                                <mat-label>Home phone</mat-label>
+                                <input matInput name="homePhone" matinput="homePhone" formControlName="homePhone"
+                                    (keyup)="changeHomePhone($event)" placeholder="(xxx) xxx-xxxx" maxlength="14">
+                            </mat-form-field>
+                            <div
+                                *ngIf="profileForm.controls['homePhone']?.touched && profileForm.controls['homePhone']?.invalid">
+                                <mat-error
+                                    *ngIf="profileForm.controls['homePhone'].errors && profileForm.controls['homePhone'].errors['required']">
+                                    Home phone is required
+                                </mat-error>
+                                <mat-error
+                                    *ngIf="profileForm.controls['homePhone'].errors && profileForm.controls['homePhone'].errors['pattern']">
+                                    Invalid format
+                                </mat-error>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <!--addressHome-->
+                        <div class="col-md-6 col-xs-12 col-sm-12 ">
+                            <mat-form-field appearance="outline" class="full-width">
+                                <mat-label>Adress home</mat-label>
+                                <input matInput name="addressHome" matinput="addressHome" formControlName="addressHome"
+                                    placeholder="Calle siempre viva, 95">
+                            </mat-form-field>
+                            <div
+                                *ngIf="profileForm.controls['addressHome']?.touched && profileForm.controls['addressHome']?.invalid">
+                                <mat-error
+                                    *ngIf="profileForm.controls['addressHome'].errors && profileForm.controls['addressHome'].errors['required']">
+                                    address home is required
+                                </mat-error>
+                                <mat-error
+                                    *ngIf="profileForm.controls['addressHome'].errors && profileForm.controls['addressHome'].errors['pattern']">
+                                    Invalid format
+                                </mat-error>
+                            </div>
+                        </div>
+                        <!--profession-->
+                        <div class="col-md-6 col-xs-12 col-sm-12">
+                            <mat-form-field appearance="outline" class="full-width">
+                                <mat-label>Postal code / ZIP</mat-label>
+                                <input matInput name="profession" matinput="postalCode" formControlName="postalCode"
+                                    placeholder="ex: JMBPD22">
+                            </mat-form-field>
+                            <div
+                                *ngIf="profileForm.controls['postalCode']?.touched && profileForm.controls['postalCode']?.invalid">
+                                <mat-error
+                                    *ngIf="profileForm.controls['postalCode'].errors && profileForm.controls['postalCode'].errors['required']">
+                                    postalCode is required
+                                </mat-error>
+                                <mat-error
+                                    *ngIf="profileForm.controls['postalCode'].errors && profileForm.controls['postalCode'].errors['pattern']">
+                                    Invalid format
+                                </mat-error>
+                            </div>
+                        </div>
 
-                <!--income-->
+                    </div>
+                    <div class="row">
+                        <!--profession-->
+                        <div class="col-md-6 col-xs-12 col-sm-12">
+                            <mat-form-field appearance="outline" class="full-width">
+                                <mat-label>Profession</mat-label>
+                                <input matInput name="profession" matinput="profession" formControlName="profession"
+                                    placeholder="Developer">
+                            </mat-form-field>
+                            <div
+                                *ngIf="profileForm.controls['profession']?.touched && profileForm.controls['profession']?.invalid">
+                                <mat-error
+                                    *ngIf="profileForm.controls['profession'].errors && profileForm.controls['profession'].errors['required']">
+                                    profession is required
+                                </mat-error>
+                                <mat-error
+                                    *ngIf="profileForm.controls['profession'].errors && profileForm.controls['profession'].errors['pattern']">
+                                    Invalid format
+                                </mat-error>
+                            </div>
+                        </div>
 
-                <div class="col">
-                    <div fxLayout="row" class="full-width">
-                        <mat-form-field appearance="standard" class="col-md-2 col-xs-6 col-sm-6">
-                            <mat-label>currency</mat-label>
-                            <input matInput name="currency" readonly matinput="currency" value="Jamaican dollar">
-                            <!-- <mat-select  readonly formControlName="currency">
+                        <!--income-->
+
+                        <div class="col">
+                            <div fxLayout="row" class="full-width">
+                                <mat-form-field appearance="standard" class="col-md-2 col-xs-6 col-sm-6">
+                                    <mat-label>currency</mat-label>
+                                    <input matInput name="currency" readonly matinput="currency" value="JMD">
+                                    <!-- <mat-select  readonly formControlName="currency">
                   <mat-option value="USD">USD</mat-option>
                   <mat-option value="JMD">Jamaican dollar</mat-option>
                 </mat-select> -->
-                        </mat-form-field>
-                        <mat-form-field appearance="standard" class="col-md-10  col-xs-6 col-sm-6">
-                            <mat-label>Income</mat-label>
-                            <input matInput name="income" matinput="income" formControlName="income"
-                                placeholder="$10,000">
-                        </mat-form-field>
-                        <div *ngIf="profileForm.controls['income']?.touched && profileForm.controls['income']?.invalid">
-                            <mat-error
-                                *ngIf="profileForm.controls['income'].errors && profileForm.controls['income'].errors['required']">
-                                Income is required
-                            </mat-error>
-                            <mat-error
-                                *ngIf="profileForm.controls['income'].errors && profileForm.controls['income'].errors['pattern']">
-                                Invalid format
-                            </mat-error>
+                                </mat-form-field>
+                                <mat-form-field appearance="standard" class="col-md-10  col-xs-6 col-sm-6">
+                                    <mat-label>Income</mat-label>
+                                    <input matInput name="income" matinput="income" formControlName="income"
+                                        placeholder="$10,000">
+                                </mat-form-field>
+                                <div
+                                    *ngIf="profileForm.controls['income']?.touched && profileForm.controls['income']?.invalid">
+                                    <mat-error
+                                        *ngIf="profileForm.controls['income'].errors && profileForm.controls['income'].errors['required']">
+                                        Income is required
+                                    </mat-error>
+                                    <mat-error
+                                        *ngIf="profileForm.controls['income'].errors && profileForm.controls['income'].errors['pattern']">
+                                        Invalid format
+                                    </mat-error>
+                                </div>
+                            </div>
                         </div>
+
                     </div>
-                </div>
-
+                </mat-card-content>
             </div>
-        </mat-card-content>
-        <mat-card-actions style="padding: 20px;">
-            <button (click)="onSubmit()" [disabled]="!profileForm.valid" mat-raised-button="" color="primary">Save
-                customer</button>
-        </mat-card-actions>
-    </mat-card>
-
+            <div class="p-20">
+                <mat-card-actions>
+                    <button (click)="onSubmit()" [disabled]="!profileForm.valid" mat-raised-button=""
+                        color="primary">Save
+                        customer</button>
+                </mat-card-actions>
+            </div>
+        </mat-card>
+    </div>
 </form>

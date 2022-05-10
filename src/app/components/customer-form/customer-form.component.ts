@@ -1,5 +1,5 @@
 import { CurrencyPipe } from '@angular/common';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { SuccessFormComponent } from './success-form/success-form.component';
@@ -13,7 +13,8 @@ export class CustomerFormComponent implements OnInit {
 
   genders: string[] = ['Male', 'Female'];
   @ViewChild('myForm') myForm!: NgForm;
-
+  maxDate:Date =  new Date();
+  
   constructor(private fb: FormBuilder, private currencyPipe: CurrencyPipe, private dialog: MatDialog) { }
 
   profileForm = this.fb.group({
@@ -22,12 +23,12 @@ export class CustomerFormComponent implements OnInit {
     addressHome: ['', [Validators.required, Validators.pattern(/^(?![\s-])([a-zA-Z0-9\s\.\,\-]|[à-ú]|[À-Ú])+$/)]],
     dob: ['', [Validators.required]],
     gender: ['', [Validators.required]],
-    cellPhone: ['', [Validators.required, Validators.pattern(/^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/)]],
+    cellPhone: ['', [Validators.required, Validators.pattern(/^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/),Validators.maxLength(14)]],
     homePhone: ['', [Validators.required, Validators.pattern(/^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/)]],
     profession: ['', [Validators.required, , Validators.pattern(/^(?![\s-])([a-zA-Z0-9\s\.\,\-]|[à-ú]|[À-Ú])+$/)]],
     income: ['', [Validators.required]],
     currency: ['JMD', [Validators.required]],
-    postalCode: ['', [Validators.required, Validators.pattern(/^(?![\s-])([a-zA-Z0-9\s])+$/), Validators.maxLength(10)]]
+    postalCode: ['', [Validators.required, Validators.pattern(/^(?![\s-])([a-zA-Z0-9])+$/), Validators.maxLength(10)]]
   });
 
   ngOnInit(): void {
@@ -57,16 +58,21 @@ export class CustomerFormComponent implements OnInit {
   }
 
   formatPhoneNumber(phoneNumber: string) {
-    console.log(phoneNumber);
     let cleaned = ('' + phoneNumber).replace(/\D/g, '');
-    let match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/);
-    if (match) {
-      return '(' + match[1] + ') ' + match[2] + '-' + match[3];
+    let matchEnd: RegExpMatchArray | undefined | null = cleaned.match(/^(\d{3})(\d{3})(\d{1})$/);
+    let matchMid: RegExpMatchArray | undefined | null = cleaned.match(/^(\d{3})(\d{1})$/);
+
+    if (matchEnd) {
+      return '(' + matchEnd[1] + ') ' + matchEnd[2] + '-' + matchEnd[3];
     }
+    if (matchMid) {
+      return '(' + matchMid[1] + ') ' + matchMid[2]
+    }
+
     return phoneNumber;
   }
 
-  changeCellPhone(event: Event){
+  changeCellPhone(event: Event) {
     if (!(event.target instanceof HTMLInputElement)) return;
 
     this.profileForm.controls['cellPhone'].setValue(this.formatPhoneNumber(event.target.value), {
@@ -74,11 +80,13 @@ export class CustomerFormComponent implements OnInit {
     });
   }
 
-  changeHomePhone(event: Event){
+  changeHomePhone(event: Event) {
     if (!(event.target instanceof HTMLInputElement)) return;
 
     this.profileForm.controls['homePhone'].setValue(this.formatPhoneNumber(event.target.value), {
       onlySelf: true,
     });
   }
+
+  
 }

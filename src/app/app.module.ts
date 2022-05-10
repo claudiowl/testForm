@@ -19,7 +19,6 @@ import { CustomerFormModule } from './components/customer-form/customer-form.mod
     CustomerFormModule
   ],
   providers: [
-   
   ],
   bootstrap: [AppComponent]
 })
