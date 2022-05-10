@@ -100,22 +100,4 @@ export class CustomerFormComponent implements OnInit, OnDestroy {
     }
   }
 
-  clearErrors() {
-    let controls = [
-      "firstName",
-      "lastName",
-      "addressHome",
-      "dob",
-      "gender",
-      "cellPhone",
-      "homePhone",
-      "profession",
-      "income",
-      "currency",
-      "postalCode",]
-    for (let iterator of controls) {
-      this.profileForm.controls[iterator].setErrors(null);
-      this.profileForm.controls[iterator].updateValueAndValidity();
-    }
-  }
 }
