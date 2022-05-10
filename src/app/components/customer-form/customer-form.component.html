@@ -60,7 +60,7 @@
                         </div>
                     </div>
 
-                    <div class="row" >
+                    <div class="row">
                         <!--Gender -->
                         <div class="col-md-6 col-xs-12 col-sm-12 p-bot">
                             <div class="row">
@@ -138,10 +138,6 @@
                             </mat-form-field>
                             <div
                                 *ngIf="profileForm.controls['homePhone']?.touched && profileForm.controls['homePhone']?.invalid">
-                                <mat-error
-                                    *ngIf="profileForm.controls['homePhone'].errors && profileForm.controls['homePhone'].errors['required']">
-                                    Home phone is required
-                                </mat-error>
                                 <mat-error
                                     *ngIf="profileForm.controls['homePhone'].errors && profileForm.controls['homePhone'].errors['pattern']">
                                     Invalid format

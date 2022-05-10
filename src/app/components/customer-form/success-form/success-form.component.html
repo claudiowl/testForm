@@ -1,11 +1,11 @@
-<h1 mat-dialog-title>Customer Validated - "<strong>{{formi.firstName}} {{formi.lastName}}"</strong></h1>
+<h1 mat-dialog-title>Customer Validated - "<strong>{{customerForm.firstName}} {{customerForm.lastName}}"</strong></h1>
 <div mat-dialog-content>
     <div class="row">
         <div class="col">
             Address Home
         </div>
         <div class="col">
-            {{ formi.addressHome}}
+            {{ customerForm.addressHome}}
         </div>
     </div>
     <div class="row">
@@ -13,7 +13,7 @@
             Postal Code
         </div>
         <div class="col">
-            {{formi.postalCode}}
+            {{customerForm.postalCode}}
         </div>
     </div>
     <div class="p-diviser">
@@ -25,15 +25,15 @@
             Mobile Phone
         </div>
         <div class="col">
-            {{formi.cellPhone}}
+            {{customerForm.cellPhone}}
         </div>
     </div>
-    <div class="row">
-        <div class="col">
+    <div  class="row">
+        <div class="col" *ngIf="customerForm.homePhone!=''">
             Home Phone
         </div>
-        <div class="col">
-            {{formi.homePhone}}
+        <div class="col" *ngIf="customerForm.homePhone!=''">
+            {{customerForm.homePhone}}
         </div>
     </div>
     <div class="p-diviser">
@@ -45,7 +45,7 @@
             Profession
         </div>
         <div class="col">
-            {{ formi.profession}}
+            {{ customerForm.profession}}
         </div>
     </div>
     <div class="row">
@@ -53,7 +53,7 @@
             Income
         </div>
         <div class="col">
-            {{formi.income}}
+            {{customerForm.income}}
         </div>
     </div>
 
