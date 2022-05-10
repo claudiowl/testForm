@@ -11,7 +11,7 @@ import { SuccessFormComponent } from './success-form/success-form.component';
   styleUrls: ['./customer-form.component.scss']
 })
 export class CustomerFormComponent implements OnInit, OnDestroy {
-  
+
   @ViewChild('myForm') myForm!: NgForm;
   genders: string[] = ['Male', 'Female'];
   maxDate: Date = new Date();
@@ -30,7 +30,7 @@ export class CustomerFormComponent implements OnInit, OnDestroy {
     homePhone: ['', [Validators.pattern(/^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/)]],
     profession: ['', [Validators.required, , Validators.pattern(/^(?![\s-])([a-zA-Z0-9\s\.\,\-]|[à-ú]|[À-Ú])+$/)]],
     income: ['', [Validators.required]],
-    currency: ['JMD', [Validators.required]],
+    currency: ['JMD', []],
     postalCode: ['', [Validators.required, Validators.pattern(/^(?![\s-])([a-zA-Z0-9])+$/), Validators.maxLength(10)]]
   });
 
@@ -43,8 +43,8 @@ export class CustomerFormComponent implements OnInit, OnDestroy {
     this.dialog.open(SuccessFormComponent, { data: { form: this.profileForm.value } });
     this.subs.push(
       this.dialog.afterAllClosed.subscribe(() => {
-        this.myForm.resetForm();
-        this.profileForm.reset();
+        this.myForm.resetForm({onlySelf: false, emitEvent: true});
+        this.profileForm.reset({onlySelf: false, emitEvent: true});
       }))
   }
 
@@ -100,4 +100,22 @@ export class CustomerFormComponent implements OnInit, OnDestroy {
     }
   }
 
+  clearErrors() {
+    let controls = [
+      "firstName",
+      "lastName",
+      "addressHome",
+      "dob",
+      "gender",
+      "cellPhone",
+      "homePhone",
+      "profession",
+      "income",
+      "currency",
+      "postalCode",]
+    for (let iterator of controls) {
+      this.profileForm.controls[iterator].setErrors(null);
+      this.profileForm.controls[iterator].updateValueAndValidity();
+    }
+  }
 }
