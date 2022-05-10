@@ -1,4 +1,4 @@
-<form [formGroup]="profileForm" class="form-container">
+<form [formGroup]="profileForm" class="form-container" #myForm="ngForm">
     <mat-card style="padding: 20px;">
         <mat-card-header style="padding: 20px;">
             <mat-card-title>
@@ -6,7 +6,7 @@
             </mat-card-title>
         </mat-card-header>
         <mat-card-content style="padding: 20px;">
-            <p>
+            <p style="color: gray;">
                 fill out the form, to assess a future customer.
             </p>
             <mat-divider></mat-divider>
@@ -18,7 +18,7 @@
                     <div class="padding-inputs">
                         <mat-form-field appearance="outline" class="full-width">
                             <mat-label>First name</mat-label>
-                            <input matInput formControlName="firstName" name="firstName" placeholder="ex: Luis">
+                            <input matInput formControlName="firstName" name="firstName" placeholder="ex: Luis" maxlength="80">
                         </mat-form-field>
                         <div
                             *ngIf="profileForm.controls['firstName']?.touched && profileForm.controls['firstName']?.invalid">
@@ -78,7 +78,7 @@
                 <div class="col-md-6 col-xs-12 col-sm-12 ">
                     <mat-form-field class="full-width" appearance="legacy">
                         <mat-label>Choose date of birth</mat-label>
-                        <input matInput readonly [matDatepicker]="picker" formControlName="dob">
+                        <input matInput  [matDatepicker]="picker" formControlName="dob" placeholder="01/20/1990">
                         <mat-hint>MM/DD/YYYY</mat-hint>
                         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                         <mat-datepicker touchUi #picker></mat-datepicker>
@@ -98,9 +98,8 @@
                 <div class="col-md-6 col-xs-12 col-sm-12 ">
                     <mat-form-field appearance="outline" class="full-width">
                         <mat-label>Cellphone</mat-label>
-                        <input matInput name="cellPhone" matinput="cellPhone"
-                            [value]="formatPhoneNumber(profileForm.controls['cellPhone'].value)"
-                            formControlName="cellPhone" placeholder="(xxx) xxx-xxxx">
+                        <input matInput name="cellPhone" matinput="cellPhone" (change)="changeCellPhone($event)"
+                            formControlName="cellPhone" placeholder="(xxx) xxx-xxxx" maxlength="17">
                     </mat-form-field>
                     <div
                         *ngIf="profileForm.controls['cellPhone']?.touched && profileForm.controls['cellPhone']?.invalid">
@@ -118,9 +117,8 @@
                 <div class="col-md-6 col-xs-12 col-sm-12">
                     <mat-form-field appearance="outline" class="full-width">
                         <mat-label>Homephone</mat-label>
-                        <input matInput name="homePhone" matinput="homePhone" formControlName="homePhone"
-                            [value]="formatPhoneNumber(profileForm.controls['homePhone'].value)"
-                            placeholder="(xxx) xxx-xxxx">
+                        <input matInput name="homePhone" matinput="homePhone" formControlName="homePhone"  (change)="changeHomePhone($event)"
+                             placeholder="(xxx) xxx-xxxx" maxlength="17">
                     </mat-form-field>
                     <div
                         *ngIf="profileForm.controls['homePhone']?.touched && profileForm.controls['homePhone']?.invalid">

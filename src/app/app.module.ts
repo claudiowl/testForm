@@ -9,7 +9,7 @@ import { CustomerFormModule } from './components/customer-form/customer-form.mod
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,

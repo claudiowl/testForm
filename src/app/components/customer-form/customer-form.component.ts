@@ -1,6 +1,8 @@
 import { CurrencyPipe } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { SuccessFormComponent } from './success-form/success-form.component';
 
 @Component({
   selector: 'app-customer-form',
@@ -9,11 +11,10 @@ import { FormBuilder, Validators } from '@angular/forms';
 })
 export class CustomerFormComponent implements OnInit {
 
-  
   genders: string[] = ['Male', 'Female'];
+  @ViewChild('myForm') myForm!: NgForm;
 
-  constructor(private fb: FormBuilder, private currencyPipe: CurrencyPipe) { }
-
+  constructor(private fb: FormBuilder, private currencyPipe: CurrencyPipe, private dialog: MatDialog) { }
 
   profileForm = this.fb.group({
     firstName: ['', [Validators.required, Validators.pattern(/^(?![\s-])([a-zA-Z0-9\s\.\,\-]|[à-ú]|[À-Ú])+$/)]],
@@ -26,7 +27,7 @@ export class CustomerFormComponent implements OnInit {
     profession: ['', [Validators.required, , Validators.pattern(/^(?![\s-])([a-zA-Z0-9\s\.\,\-]|[à-ú]|[À-Ú])+$/)]],
     income: ['', [Validators.required]],
     currency: ['JMD', [Validators.required]],
-    postalCode:['',[Validators.required,, Validators.pattern(/^(?![\s-])([a-zA-Z0-9\s])+$/)]]
+    postalCode: ['', [Validators.required, Validators.pattern(/^(?![\s-])([a-zA-Z0-9\s])+$/), Validators.maxLength(10)]]
   });
 
   ngOnInit(): void {
@@ -35,7 +36,11 @@ export class CustomerFormComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log('form data is ', this.profileForm.value);
+    this.dialog.open(SuccessFormComponent, { data: { form: this.profileForm.value } });
+    this.dialog.afterAllClosed.subscribe(() => {
+      this.profileForm.reset();
+      this.myForm.resetForm();
+    })
   }
 
   currencyFormat() {
@@ -61,4 +66,19 @@ export class CustomerFormComponent implements OnInit {
     return phoneNumber;
   }
 
+  changeCellPhone(event: Event){
+    if (!(event.target instanceof HTMLInputElement)) return;
+
+    this.profileForm.controls['cellPhone'].setValue(this.formatPhoneNumber(event.target.value), {
+      onlySelf: true,
+    });
+  }
+
+  changeHomePhone(event: Event){
+    if (!(event.target instanceof HTMLInputElement)) return;
+
+    this.profileForm.controls['homePhone'].setValue(this.formatPhoneNumber(event.target.value), {
+      onlySelf: true,
+    });
+  }
 }
