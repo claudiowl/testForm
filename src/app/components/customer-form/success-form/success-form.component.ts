@@ -10,14 +10,14 @@ import { CustomerForm } from '../../../models/customer-form';
 })
 export class SuccessFormComponent {
 
-  public customerForm!:CustomerForm;
+  public customerForm!: CustomerForm;
 
   constructor(public dialogRef: MatDialogRef<SuccessFormComponent>,
     @Inject(MAT_DIALOG_DATA) public data: {
       form: CustomerForm
-    },) { 
-      this.customerForm=data.form;
-    }
+    },) {
+    this.customerForm = data.form;
+  }
 
   close() {
     this.dialogRef.close();
